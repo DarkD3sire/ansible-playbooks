@@ -65,8 +65,8 @@
         login_password: "{{ mysql_root_password }}"
 
     - name: "Ansible Create directory if not exists"
-      file:
-      path: /home/iitbdrf/website
+      file: website
+      path: /home/iitbdrf
       state: directory
       mode: 0755
       group: www-data
