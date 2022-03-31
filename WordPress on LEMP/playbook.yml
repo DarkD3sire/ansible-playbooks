@@ -67,17 +67,6 @@
         group: www-data
         owner: iitbdrf
 
-  handlers:
-    - name: Reload Nginx
-      service:
-        name: nginx
-        state: reloaded
-
-    - name: Restart Nginx
-      service:
-        name: nginx
-        state: restarted
-
 # MySQL Configuration
     - name: Sets the root password 
       mysql_user: 
@@ -158,3 +147,14 @@
       template:
         src: "files/info.php.j2"
         dest: "/home/iitbdrf/{{ http_host }}/info.php"
+
+  handlers:
+    - name: Reload Nginx
+      service:
+        name: nginx
+        state: reloaded
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
