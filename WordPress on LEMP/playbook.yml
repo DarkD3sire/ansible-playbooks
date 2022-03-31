@@ -30,6 +30,12 @@
         dest: "/etc/nginx/sites-available/{{ http_conf }}"
       tags: [ nginx ]
 
+    - name: Sets Nginx default conf file
+      template:
+        src: "files/nginx_default.conf.j2"
+        dest: "/etc/nginx/conf-available/{{ http_conf }}"
+      tags: [ nginx ]      
+
     - name: Enables new site
       file:
         src: "/etc/nginx/sites-available/{{ http_conf }}"
@@ -37,7 +43,15 @@
         state: link
       notify: Reload Nginx
       tags: [ nginx ]
-    
+
+    - name: Enables default conf
+      file:
+        src: "/etc/nginx/conf-available/{{ http_conf }}"
+        dest: "/etc/nginx/conf-enabled/{{ http_conf }}"
+        state: link
+      notify: Reload Nginx
+      tags: [ nginx ]
+  
     - name: Removes "default" site
       file:
         path: "/etc/nginx/sites-enabled/default"
