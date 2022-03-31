@@ -2,15 +2,20 @@
 # Wordpress on Ubuntu 20.04 LAMP
 #########################################################
 ---
-- hosts: all
+- hosts: localhost
+  connection: local
   become: true
   vars_files:
     - vars/default.yml
   
   tasks:
-    - name: Install Prerequisites
-      apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
-      loop: ['aptitude']
+    #- name: Install Prerequisites
+    #  apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+    #  loop: ['aptitude']
+    #  tags: [ system ]
+
+    - name: 
+      apt: update_cache=yes force_apt_get=yes
       tags: [ system ]
 
     - name: Install LEMP packages
