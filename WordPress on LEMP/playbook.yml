@@ -107,19 +107,13 @@
         login_password: "{{ mysql_root_password }}"
       tags: [ mysql ]
 
-# Sets Up PHP Info Page
-    - name: Sets Up PHP Info Page
-      template:
-        src: "files/info.php.j2"
-        dest: "/home/iitbdrf/website/info.php"
-
 # WordPress Configuration
     - name: Download and unpack latest WordPress
       unarchive:
         src: https://wordpress.org/latest.tar.gz
         dest: "/home/iitbdrf/{{ http_host }}"
         remote_src: yes
-        creates: "/home/iitbdrf/{{ http_host }}/wordpress"
+        creates: "/home/iitbdrf/{{ http_host }}/"
       tags: [ wordpress ]
 
     - name: Set ownership
@@ -132,19 +126,24 @@
       tags: [ wordpress ]
 
     - name: Set permissions for directories
-      shell: "/usr/bin/find /var/www/{{ http_host }}/wordpress/ -type d -exec chmod 750 {} \\;"
+      shell: "/usr/bin/find /var/www/{{ http_host }}/ -type d -exec chmod 750 {} \\;"
       tags: [ wordpress ]
 
     - name: Set permissions for files
-      shell: "/usr/bin/find /var/www/{{ http_host }}/wordpress/ -type f -exec chmod 640 {} \\;"
+      shell: "/usr/bin/find /var/www/{{ http_host }}/ -type f -exec chmod 640 {} \\;"
       tags: [ wordpress ]
 
     - name: Set up wp-config
       template:
         src: "files/wp-config.php.j2"
-        dest: "/var/www/{{ http_host }}/wordpress/wp-config.php"
+        dest: "/var/www/{{ http_host }}/wp-config.php"
       tags: [ wordpress ]
 
+# Sets Up PHP Info Page
+    - name: Sets Up PHP Info Page
+      template:
+        src: "files/info.php.j2"
+        dest: "/home/iitbdrf/{{ http_host }}/info.php"
 
 
 
