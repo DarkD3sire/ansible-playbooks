@@ -158,11 +158,3 @@
       template:
         src: "files/info.php.j2"
         dest: "/home/iitbdrf/{{ http_host }}/info.php"
-
-
-
-
-
-
-
-
