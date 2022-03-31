@@ -65,13 +65,12 @@
         login_password: "{{ mysql_root_password }}"
 
     - name: Ansible Create directory if not exists
-      file: website
-        path: "/home/iitbdrf"
+      file:
+        path: /home/iitbdrf/website
         state: directory
         mode: 0755
         group: www-data
         owner: iitbdrf
-        when: my_folder.stat.exists == false
 
 # Sets Up PHP Info Page
     - name: Sets Up PHP Info Page
