@@ -9,10 +9,10 @@
     - vars/default.yml
   
   tasks:
-    #- name: Install Prerequisites
-    #  apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
-    #  loop: ['aptitude']
-    #  tags: [ system ]
+    - name: Install Prerequisites
+      apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+      loop: ['aptitude']
+      tags: [ system ]
 
     - name: 
       apt: update_cache=yes force_apt_get=yes
