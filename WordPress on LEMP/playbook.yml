@@ -64,6 +64,12 @@
         login_user: root
         login_password: "{{ mysql_root_password }}"
 
+# Sets Up PHP Info Page
+    - name: Sets Up PHP Info Page
+      template:
+        src: "files/info.php.j2"
+        dest: "/home/iitbdrf/website/info.php"
+
   handlers:
     - name: Reload Nginx
       service:
