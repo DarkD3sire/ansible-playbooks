@@ -23,6 +23,11 @@
       loop: [ 'nginx', 'mariadb-server', 'mariadb-client', 'php-fpm', 'python3-pymysql', 'php-mysql' ]
       tags: [ system ]
 
+    - name: Install PHP Extensions
+      apt: name={{ item }} update_cache=yes state=latest
+      loop: "{{ php_modules }}"
+      tags: [ system ]
+
 # Nginx Configuration
     - name: Sets Nginx conf file
       template:

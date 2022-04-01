@@ -1,6 +1,14 @@
 ---
-mysql_root_password: "mysql_root_password"
+#System Settings
+php_modules: [ 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip' ]
+
+#Nginx Settings
 http_host: "iitbdrf"
 http_conf: "iitbdrf.conf"
 http_port: "80"
-mysql_db: "iitbdrf"
+
+#MySQL Settings
+mysql_root_password: "mysql_root_password"
+mysql_db: "wordpress"
+mysql_user: "sammy"
+mysql_password: "password"
