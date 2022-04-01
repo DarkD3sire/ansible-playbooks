@@ -3,7 +3,7 @@
 php_modules: [ 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip' ]
 
 #Nginx Settings
-http_host: "iitbdrf"
+http_host: "website"
 http_conf: "iitbdrf.conf"
 http_port: "80"
 
