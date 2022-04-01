@@ -58,21 +58,12 @@
 
     - name: Create Website Directory
       file:
-        path: /home/iitbdrf/website
+        path: /home/iitbdrf/{{ http_host }}
         state: directory
         mode: 0755
         group: www-data
         owner: iitbdrf
       tags: [ nginx ]
-
-    - name: Create document root
-      file:
-        path: "/var/www/{{ http_host }}"
-        state: directory
-        owner: "iitbdrf"
-        group: "www-data"
-        mode: '0755'
-      tags: [ apache ]
 
 # MySQL Configuration
     - name: Sets the root password 
