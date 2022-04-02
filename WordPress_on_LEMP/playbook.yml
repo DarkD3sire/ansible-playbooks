@@ -2,8 +2,7 @@
 # Wordpress on Ubuntu 20.04 LAMP
 #########################################################
 ---
-- hosts: localhost
-  connection: local
+- hosts: all
   become: true
   vars_files:
     - vars/default.yml
