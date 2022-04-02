@@ -55,14 +55,14 @@
       notify: Reload Nginx
       tags: [ nginx ]
 
-    #- name: Create Website Directory
-    #  file:
-    #    path: "/home/{{ user }}/{{ http_host }}"
-    #    state: directory
-    #    mode: 0755
-    #    group: www-data
-    #    owner: "{{ user }}"
-    #  tags: [ nginx ]
+    - name: Create Website Directory
+      file:
+        path: "/home/{{ user }}/{{ http_host }}"
+        state: directory
+        mode: 0755
+        group: www-data
+        owner: "{{ user }}"
+      tags: [ nginx ]
 
 # WordPress Configuration
     - name: Download and unpack latest WordPress
@@ -70,7 +70,7 @@
         src: https://wordpress.org/latest.tar.gz
         dest: "/home/{{ user }}/{{ http_host }}"
         remote_src: yes
-        creates: "/home/{{ user }}/{{ http_host }}/"
+      #  creates: "/home/{{ user }}/{{ http_host }}/"
       tags: [ wordpress ]
 
     - name: Set ownership
