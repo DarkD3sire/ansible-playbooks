@@ -57,12 +57,44 @@
 
     - name: Create Website Directory
       file:
-        path: /home/{{ user }}/{{ http_host }}
+        path: "/home/{{ user }}/{{ http_host }}"
         state: directory
         mode: 0755
         group: www-data
         owner: "{{ user }}"
       tags: [ nginx ]
+
+# WordPress Configuration
+    - name: Download and unpack latest WordPress
+      unarchive:
+        src: https://wordpress.org/latest.tar.gz
+        dest: "/home/{{ user }}/{{ http_host }}"
+        remote_src: yes
+        creates: "/home/{{ user }}/{{ http_host }}/"
+      tags: [ wordpress ]
+
+    - name: Set ownership
+      file:
+        path: "/home/{{ user }}/{{ http_host }}"
+        state: directory
+        recurse: yes
+        owner: "{{ user }}"
+        group: www-data
+      tags: [ wordpress ]
+
+    - name: Set permissions for directories
+      shell: "/usr/bin/find /home/{{ user }}/{{ http_host }}/ -type d -exec chmod 750 {} \\;"
+      tags: [ wordpress ]
+
+    - name: Set permissions for files
+      shell: "/usr/bin/find /home/{{ user }}/{{ http_host }}/ -type f -exec chmod 640 {} \\;"
+      tags: [ wordpress ]
+
+    - name: Set up wp-config
+      template:
+        src: "files/wp-config.php.j2"
+        dest: "/home/{{ user }}/{{ http_host }}/wp-config.php"
+      tags: [ wordpress ]
 
 # MySQL Configuration
     - name: Sets the root password 
@@ -106,38 +138,6 @@
         login_user: root
         login_password: "{{ mysql_root_password }}"
       tags: [ mysql ]
-
-# WordPress Configuration
-    - name: Download and unpack latest WordPress
-      unarchive:
-        src: https://wordpress.org/latest.tar.gz
-        dest: "/home/{{ user }}/{{ http_host }}"
-        remote_src: yes
-        creates: "/home/{{ user }}/{{ http_host }}/"
-      tags: [ wordpress ]
-
-    - name: Set ownership
-      file:
-        path: "/home/{{ user }}/{{ http_host }}"
-        state: directory
-        recurse: yes
-        owner: "{{ user }}"
-        group: www-data
-      tags: [ wordpress ]
-
-    - name: Set permissions for directories
-      shell: "/usr/bin/find /home/{{ user }}/{{ http_host }}/ -type d -exec chmod 750 {} \\;"
-      tags: [ wordpress ]
-
-    - name: Set permissions for files
-      shell: "/usr/bin/find /home/{{ user }}/{{ http_host }}/ -type f -exec chmod 640 {} \\;"
-      tags: [ wordpress ]
-
-    - name: Set up wp-config
-      template:
-        src: "files/wp-config.php.j2"
-        dest: "/home/{{ user }}/{{ http_host }}/wp-config.php"
-      tags: [ wordpress ]
 
 # Sets Up PHP Info Page
     - name: Sets Up PHP Info Page
