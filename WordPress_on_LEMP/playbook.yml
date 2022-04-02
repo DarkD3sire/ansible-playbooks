@@ -61,7 +61,7 @@
         state: directory
         mode: 0755
         group: www-data
-        owner: {{ user }}
+        owner: "{{ user }}"
       tags: [ nginx ]
 
 # MySQL Configuration
@@ -121,7 +121,7 @@
         path: "/home/{{ user }}/{{ http_host }}"
         state: directory
         recurse: yes
-        owner: {{ user }}
+        owner: "{{ user }}"
         group: www-data
       tags: [ wordpress ]
 
