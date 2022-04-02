@@ -94,6 +94,8 @@
       template:
         src: "files/wp-config.php.j2"
         dest: "/home/{{ user }}/{{ wp_dir }}/wp-config.php"
+        owner: "{{ user }}"
+        group: www-data
       tags: [ wordpress ]
 
 # MySQL Configuration
