@@ -97,6 +97,8 @@
         owner: "{{ user }}"
         group: www-data
       tags: [ wordpress ]
+      notify: Reload Nginx
+      tags: [ nginx ]
 
 # MySQL Configuration
     - name: Sets the root password 
@@ -142,10 +144,10 @@
       tags: [ mysql ]
 
 # Sets Up PHP Info Page
-    - name: Sets Up PHP Info Page
-      template:
-        src: "files/info.php.j2"
-        dest: "/home/{{ user }}/{{ http_host }}/info.php"
+#    - name: Sets Up PHP Info Page
+#      template:
+#        src: "files/info.php.j2"
+#        dest: "/home/{{ user }}/{{ http_host }}/info.php"
 
   handlers:
     - name: Reload Nginx
