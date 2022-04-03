@@ -47,7 +47,8 @@
       tags: [ nginx ]      
 
     - name: Sets h5bp nginx config
-      template:
+      become: true
+      copy:
         src: "h5bp"
         dest: "/etc/nginx"
       notify: Reload Nginx
