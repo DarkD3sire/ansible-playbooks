@@ -44,7 +44,22 @@
       template:
         src: "files/nginx.conf.j2"
         dest: "/etc/nginx/nginx.conf"
-      tags: [ nginx ]      
+      tags: [ nginx ]
+
+    - name: Create certs directory
+      file:
+        path: "/etc/nginx/certs"
+        state: directory
+
+    - name: Copy ssl certificates
+      copy:
+        src: "files/default.crt"
+        dest: "/etc/nginx/certs/default.crt"
+
+    - name: Copy ssl key
+      copy:
+        src: "files/default.key"
+        dest: "/etc/nginx/certs/default.key"
 
     - name: Sets h5bp nginx config
       copy:
@@ -59,8 +74,6 @@
         state: absent
       notify: Reload Nginx
       tags: [ nginx ]
-
-
 
 #    - name: Create Website Directory
 #      file:
