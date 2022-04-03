@@ -28,26 +28,30 @@
       tags: [ system ]
 
 # Nginx Configuration
-    - name: Sets Nginx conf file
+    - name: Sets SSL Nginx conf file
       template:
-        src: "files/nginx.conf.j2"
-        dest: "/etc/nginx/sites-available/{{ http_conf }}"
+        src: "files/website.conf.j2"
+        dest: "/etc/nginx/conf.d/{{ http_conf }}"
+      tags: [ nginx ]
+
+    - name: Sets Non-SSL Nginx conf file
+      template:
+        src: "files/no-ssl.website.conf.j2"
+        dest: "/etc/nginx/conf.d/no-ssl.{{ http_conf }}"
       tags: [ nginx ]
 
     - name: Sets Nginx default conf file
       template:
-        src: "files/nginx-default.conf.j2"
+        src: "files/nginx.conf.j2"
         dest: "/etc/nginx/nginx.conf"
       tags: [ nginx ]      
 
-    - name: Enables new site
-      file:
-        src: "/etc/nginx/sites-available/{{ http_conf }}"
-        dest: "/etc/nginx/sites-enabled/{{ http_conf }}"
-        state: link
-      notify: Reload Nginx
+    - name: Sets h5bp nginx config
+      template:
+        src: "h5bp"
+        dest: "/etc/nginx"
       tags: [ nginx ]
-  
+
     - name: Removes "default" site
       file:
         path: "/etc/nginx/sites-enabled/default"
@@ -55,9 +59,11 @@
       notify: Reload Nginx
       tags: [ nginx ]
 
+
+
 #    - name: Create Website Directory
 #      file:
-#        path: "/home/{{ user }}/{{ http_host }}"
+#        path: "/var/www/{{ http_host }}"
 #        state: directory
 #        mode: 0755
 #        group: www-data
@@ -68,14 +74,14 @@
     - name: Download and unpack latest WordPress
       unarchive:
         src: https://wordpress.org/latest.tar.gz
-        dest: "/home/{{ user }}"
+        dest: "/var/www/"
         remote_src: yes
-      #  creates: "/home/{{ user }}/{{ http_host }}/"
+      #  creates: "/var/www/{{ http_host }}/"
       tags: [ wordpress ]
 
     - name: Set ownership
       file:
-        path: "/home/{{ user }}/{{ wp_dir }}"
+        path: "/var/www/{{ http_host }}/{{ wp_dir }}"
         state: directory
         recurse: yes
         owner: "{{ user }}"
@@ -83,21 +89,27 @@
       tags: [ wordpress ]
 
     - name: Set permissions for directories
-      shell: "/usr/bin/find /home/{{ user }}/{{ wp_dir }}/ -type d -exec chmod 750 {} \\;"
+      shell: "/usr/bin/find /var/www/{{ http_host }}/{{ wp_dir }}/ -type d -exec chmod 750 {} \\;"
       tags: [ wordpress ]
 
     - name: Set permissions for files
-      shell: "/usr/bin/find /home/{{ user }}/{{ wp_dir }}/ -type f -exec chmod 640 {} \\;"
+      shell: "/usr/bin/find /var/www/{{ http_host }}/{{ wp_dir }}/ -type f -exec chmod 640 {} \\;"
       tags: [ wordpress ]
 
     - name: Set up wp-config
       template:
         src: "files/wp-config.php.j2"
-        dest: "/home/{{ user }}/{{ wp_dir }}/wp-config.php"
+        dest: "/var/www/{{ http_host }}/{{ wp_dir }}/wp-config.php"
         owner: "{{ user }}"
         group: www-data
       tags: [ wordpress ]
-      notify: Reload Nginx
+
+    - name: Add new site to home directory of user
+      file:
+        src: "/var/www/{{ http_host }}/{{ wp_dir }}"
+        dest: "/home/{{ user }}/{{ wp_dir }}"
+        state: link
+      notify: Restart Nginx
       tags: [ nginx ]
 
 # MySQL Configuration
@@ -147,7 +159,7 @@
 #    - name: Sets Up PHP Info Page
 #      template:
 #        src: "files/info.php.j2"
-#        dest: "/home/{{ user }}/{{ http_host }}/info.php"
+#        dest: "/var/www/{{ http_host }}/info.php"
 
   handlers:
     - name: Reload Nginx
