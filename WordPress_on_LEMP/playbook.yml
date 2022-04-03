@@ -127,6 +127,12 @@
       tags: [ nginx ]
 
 # MySQL Configuration
+
+    - name: Sets MySQL root autologin
+      copy:
+        src: files/.my.cnf.j2
+        dest: /root/.my.cnf
+
     - name: Sets the root password 
       mysql_user: 
         name: root 
