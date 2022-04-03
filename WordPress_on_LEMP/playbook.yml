@@ -50,6 +50,7 @@
       template:
         src: "h5bp"
         dest: "/etc/nginx"
+      notify: Reload Nginx
       tags: [ nginx ]
 
     - name: Removes "default" site
