@@ -13,5 +13,5 @@ mysql_db: "wordpress"
 mysql_user: "wordpress"
 mysql_password: "password"
 
-user: iitbdrf1
+user: iitbdrf
 wp_dir: wordpress
