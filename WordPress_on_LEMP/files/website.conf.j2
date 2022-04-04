@@ -1,6 +1,6 @@
 server {
         listen {{ http_port }};
-        root /home/{{ user }}/wordpress;
+        root /var/www/{{ http_host }}/{{ wp_dir }};
         index index.php index.html index.cgi index.pl  index.xhtml index.htm;
         server_name {{ http_host }};
 
