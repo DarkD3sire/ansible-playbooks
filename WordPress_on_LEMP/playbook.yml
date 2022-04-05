@@ -128,11 +128,11 @@
 
 # MySQL Configuration
 
-    - name: Sets MySQL root autologin
-      copy:
-        src: files/.my.cnf.j2
-        dest: /root/.my.cnf
-        tags: [ mysql, mysql-root ]
+    - name: Set MySQL root autologin
+      template:
+        src: "files/.my.cnf.j2"
+        dest: "/root/.my.cnf"
+      tags: [ mysql, mysql-root ]
 
     - name: Sets the root password 
       mysql_user: 
