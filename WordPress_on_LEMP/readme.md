@@ -1,6 +1,6 @@
 # Wordpress on Ubuntu 20.04 LEMP
 
-This playbook will install a WordPress website on top of a LEMP environment (**L**inux, **E**gine-x, **M**ariaDB and **P**HP) on an Ubuntu 20.04 machine. A virtualhost will be created with the options specified in the `vars/default.yml` variable file.
+This playbook will install a WordPress website on top of a LEMP environment (**L**inux, **E**ngine-x, **M**ariaDB and **P**HP) on an Ubuntu 20.04 machine. A virtualhost will be created with the options specified in the `vars/default.yml` variable file.
 
 ## Settings
 
