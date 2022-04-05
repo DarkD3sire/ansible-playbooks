@@ -5,7 +5,7 @@ php_modules: [ 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'p
 #Nginx Settings
 http_host: "localhost"
 http_conf: "localhost.conf"
-http_port: "80"
+#http_port: "80"
 
 #MySQL Settings
 mysql_root_password: "mysql_root_password"
