@@ -126,6 +126,15 @@
       notify: Restart Nginx
       tags: [ nginx ]
 
+    - name: Add a script to fix permissions & ownership
+      template:
+        src: "files/permfix.sh.j2"
+        dest: "/var/www/{{ http_host }}/permfix.sh"
+        owner: iitbdrf
+        group: iitbdrf
+        mode: 0640
+      tags: [ nginx ]
+
 # MySQL Configuration
 
     - name: Set MySQL root autologin
