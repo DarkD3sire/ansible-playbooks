@@ -30,7 +30,6 @@ cd ansible-playbooks/WordPress_on_LEMP
 ```shell
 nano vars/default.yml
 ```
-
 ```yml
 ---
 #System Settings
