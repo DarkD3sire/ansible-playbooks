@@ -29,7 +29,7 @@ server {
 
   # Path for static files
   root /var/www/{{ http_host }}/{{ wp_dir }};
-
+  index index.php index.html index.cgi index.pl  index.xhtml index.htm;
   # Custom error pages
   include h5bp/errors/custom_errors.conf;
 
