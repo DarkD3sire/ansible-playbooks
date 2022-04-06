@@ -1,6 +1,6 @@
 ---
 #System Settings
-php_modules: [ 'php8.0-curl', 'php8.0-gd', 'php8.0-mbstring', 'php8.0-xml', 'php8.0-xmlrpc', 'php8.0-soap', 'php8.0-intl', 'php8.0-zip' ]
+php_modules: [ 'php8.0-curl', 'php8.0-gd', 'php8.0-mbstring', 'php8.0-xml', 'php8.0-xmlrpc', 'php8.0-soap', 'php8.0-intl', 'php8.0-zip', 'php8.0-imagick' ]
 
 #Nginx Settings
 http_host: "localhost"

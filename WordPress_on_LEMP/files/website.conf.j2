@@ -1,5 +1,5 @@
 server {
-        listen {{ http_port }};
+        listen 443;
         root /var/www/{{ http_host }}/{{ wp_dir }};
         index index.php index.html index.cgi index.pl  index.xhtml index.htm;
         server_name {{ http_host }};
