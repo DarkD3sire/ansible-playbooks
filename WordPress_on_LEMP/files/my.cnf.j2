@@ -1,0 +1,91 @@
+# The MariaDB configuration file
+#
+# The MariaDB/MySQL tools read configuration files in the following order:
+# 1. "/etc/mysql/mariadb.cnf" (this file) to set global defaults,
+# 2. "/etc/mysql/conf.d/*.cnf" to set global options.
+# 3. "/etc/mysql/mariadb.conf.d/*.cnf" to set MariaDB-only options.
+# 4. "~/.my.cnf" to set user-specific options.
+#
+# If the same option is defined multiple times, the last one will apply.
+#
+# One can use all long options that the program supports.
+# Run program with --help to get a list of available options and with
+# --print-defaults to see which it would actually understand and use.
+
+#
+# This group is read both both by the client and the server
+# use it for options that affect everything
+#
+[client-server]
+
+# Import all .cnf files from configuration directory
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mariadb.conf.d/
+
+[mysqld]
+#skip-grant-tables
+performance_schema=ON
+log-error=/var/log/mysql/error.log
+tmpdir=/var/tmp
+sql_mode=NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+log_warnings=2
+query_cache_size=0M
+key_buffer_size=8M
+#sort_buffer_size=256k
+sort_buffer_size=512k
+read_buffer_size=256k
+tmp_table_size=256M
+max_heap_table_size=256M
+table_definition_cache=8192
+table_open_cache=20000
+open_files_limit=50000
+max_connections=600
+extra_max_connections=5
+join_buffer_size=128k
+default-storage-engine=innodb
+userstat=on
+skip-partition
+ft_min_word_len=3
+old_passwords=0
+datadir=/var/lib/mysql
+skip-external-locking
+query_cache_type=0
+collation_server=utf8_unicode_ci
+character_set_server=utf8
+delayed_insert_timeout=40
+interactive_timeout=10
+wait_timeout=3600
+connect_timeout=20
+thread_cache_size=64
+max_connect_errors=100
+max_allowed_packet=256M
+#read_rnd_buffer_size=2M
+read_rnd_buffer_size=8M
+myisam_sort_buffer_size=32M
+server-id=1
+innodb_file_per_table=1
+innodb_strict_mode=0
+innodb_fast_shutdown=0
+innodb_open_files=300
+innodb_log_file_size=256M
+innodb_log_files_in_group=2
+innodb_flush_method=O_DIRECT
+innodb_stats_on_metadata=0
+innodb_buffer_pool_size=2048M
+innodb_temp_data_file_path=ibtmp1:12M:autoextend:max:10G
+innodb_flush_log_at_trx_commit=2
+innodb_buffer_pool_instances=2
+slow_query_log=1
+long_query_time=20
+log_queries_not_using_indexes=ON
+log_output=FILE
+slow_query_log_file=/var/log/mysql/slow-query.log
+
+[mysql.server]
+user=mysql
+[mysqldump]
+quick
+max_allowed_packet=256M
+[mysql]
+no-auto-rehash
+max_allowed_packet=256M
