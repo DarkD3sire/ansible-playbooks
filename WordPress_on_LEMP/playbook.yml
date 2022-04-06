@@ -15,10 +15,9 @@
 
     - name: Make sure ondrej repository is enabled
       apt_repository:
-       repo: deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main
+       repo: ppa:ondrej/php
        state: present
        update_cache: True
-       filename: ondrej-ubuntu-php-focal.list
 
     - name: 
       apt: update_cache=yes force_apt_get=yes
