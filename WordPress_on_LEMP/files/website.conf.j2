@@ -31,6 +31,7 @@ server {
 
   # The host name to respond to
   server_name {{ http_host }};
+  index index.php index.html index.cgi index.pl  index.xhtml index.htm;
 
   include h5bp/tls/ssl_engine.conf;
   include h5bp/tls/certificate_files.conf;
@@ -38,21 +39,22 @@ server {
 
   # Path for static files
   root /var/www/{{ http_host }}/{{ wp_dir }};
-  index index.php index.html index.cgi index.pl  index.xhtml index.htm;
 
   # Custom error pages
   include h5bp/errors/custom_errors.conf;
 
   # Include the basic h5bp config set
   include h5bp/basic.conf;
-          location ~ \.php$ {
-                include snippets/fastcgi-php.conf;
-                fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
-        }
-                location ~ /\.ht {
-                deny all;
-        }
-                location / {
+        location / {
                 try_files $uri $uri/ =404;
+        }
+
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        }
+
+        location ~ /\.ht {
+                deny all;
         }
 }
