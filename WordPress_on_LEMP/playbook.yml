@@ -13,13 +13,20 @@
       loop: ['aptitude']
       tags: [ system ]
 
+    - name: Make sure ondrej repository is enabled
+      apt_repository:
+       repo: deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main
+       state: present
+       update_cache: True
+       filename: ondrej-ubuntu-php-focal.list
+
     - name: 
       apt: update_cache=yes force_apt_get=yes
       tags: [ system ]
 
     - name: Install LEMP packages
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
-      loop: [ 'nginx', 'mariadb-server', 'mariadb-client', 'php-fpm', 'python3-pymysql', 'php-mysql', 'vim', 'sysstat' ]
+      loop: [ 'nginx', 'mariadb-server', 'mariadb-client', 'php8.0-fpm', 'python3-pymysql', 'php8.0-mysql', 'vim', 'sysstat' ]
       tags: [ system ]
 
     - name: Install PHP Extensions
