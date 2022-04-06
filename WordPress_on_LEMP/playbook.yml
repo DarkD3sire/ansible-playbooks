@@ -219,3 +219,8 @@
       service:
         name: nginx
         state: restarted
+
+    - name: Restart MySQL
+      service:
+        name: mariadb
+        state: restarted
