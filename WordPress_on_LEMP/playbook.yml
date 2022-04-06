@@ -22,10 +22,10 @@
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
       loop: ['aptitude']
       tags: [ system ]
-      
+
     - name: Install LEMP packages
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
-      loop: [ 'nginx', 'mariadb-server', 'mariadb-client', 'php8.0-fpm', 'python3-pymysql', 'php8.0-mysql', 'vim', 'sysstat' ]
+      loop: [ 'nginx', 'mariadb-server', 'mariadb-client', 'php8.0-fpm', 'python3-pymysql', 'php8.0-mysql', 'vim', 'sysstat', 'curl' ]
       tags: [ system ]
 
     - name: Install PHP Extensions
