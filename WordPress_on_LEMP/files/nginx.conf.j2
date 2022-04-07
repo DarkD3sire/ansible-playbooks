@@ -54,6 +54,9 @@ include custom.d/*.conf;
 
 http {
 
+  fastcgi_buffers 16 16k; 
+  fastcgi_buffer_size 32k;
+
   # Hide Nginx version information.
   include h5bp/security/server_software_information.conf;
 
