@@ -46,9 +46,8 @@ server {
   # Include the basic h5bp config set
   include h5bp/basic.conf;
         location / {
-                try_files $uri $uri/ =404;
+            try_files $uri $uri/ /index.php?$args;
         }
-
         location ~ \.php$ {
                 include snippets/fastcgi-php.conf;
                 fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
