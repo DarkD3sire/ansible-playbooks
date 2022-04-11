@@ -11,3 +11,7 @@ echo "Done!"
 echo "Setting /var/www/{{ http_host }} ownership to {{ user }}:www-data ..."
 chown -R {{ user }}:www-data /var/www/{{ http_host }}
 echo "Done!"
+echo "Setting up wordfence file ownership.."
+chown www-data:www-data /var/www/{{ http_host }}/{{ wp_dir }}/wordfence-waf.php
+chown www-data:www-data /var/www/{{ http_host }}/{{ wp_dir }}/.user.ini
+echo "Done!"
