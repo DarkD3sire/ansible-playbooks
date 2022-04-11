@@ -45,4 +45,8 @@ server {
                 location ~ /\.ht {
                 deny all;
         }
+
+        location ~ ^/\.user\.ini {
+        deny all;
+        }
 }
