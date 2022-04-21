@@ -1,9 +1,9 @@
 #!/bin/bash
 echo "Setting directory permissions to 750..."
-find /var/www/{{ http_host }}/{{ wp_dir }}/ -type d -exec chmod 750 {};
+find /var/www/{{ http_host }}/{{ wp_dir }}/ -type d -exec chmod 750 {} \;
 echo "Done!"
 echo "Setting file  permissions to 750..."
-find /var/www/{{ http_host }}/{{ wp_dir }}/ -type f -exec chmod 640 {};
+find /var/www/{{ http_host }}/{{ wp_dir }}/ -type f -exec chmod 640 {} \;
 echo "Done!"
 echo "Setting ownership of uploads directory..."
 chown -R www-data:www-data /var/www/{{ http_host }}/{{ wp_dir }}/wp-content/uploads
