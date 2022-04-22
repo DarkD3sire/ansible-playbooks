@@ -43,6 +43,11 @@
         dest: /etc/firewalld/direct.xml
       notify: reload_firewalld
 
+    - name: Copy /etc/sysctl.conf file
+      template:
+        src: files/sysctl.conf.j2
+        dest: /etc/sysctl.conf
+
   handlers:
     - name: reload_firewalld
       service:
