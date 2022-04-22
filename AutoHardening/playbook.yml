@@ -16,10 +16,10 @@
         cache_valid_time: 86400 #One day
       tags: [ system ]
 
-    - name: Install requirec components
+    - name: Install required components
       apt:
         name: firewalld
-        state: latest
+        state: installed
         enabled: yes
     - name: Start Firewalld
       service: 
@@ -31,3 +31,19 @@
         immediate: yes
         service: "{{ firewalld_incoming }}"
         state: enabled
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
