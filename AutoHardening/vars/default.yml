@@ -1,0 +1,3 @@
+---
+# Firewall Rules
+firewalld: [ 'http', 'https', 'ssh' ]
