@@ -27,17 +27,25 @@
         name: firewalld
         state: started
 
-    - name: Firewalld Rules
+    - name: Add ports
       firewalld:
         permanent: yes
         immediate: yes
-        service: "{{ firewalld_incoming }}"
-        state: enabled
+        service: "{{service}}"
+      with_items:
+       - {service: "http, htps, ssh" }
 
-
-
-
-
+#    - name: Add ports
+#      firewalld:
+#        permanent: yes
+#        immediate: yes
+#        port: "{{item.port}}/{{item.proto}}"
+#        state: "{{item.state}}"
+#        zone: "{{item.zone}}"
+#      with_items:
+#       - {port: "80", proto: "tcp", state: "enabled", zone: "public" }
+#       - {port: "443", proto: "tcp", state: "enabled", zone: "public" }
+#       - {port: "10050", proto: "tcp", state: "enabled", zone: "internal" }
 
 
 
