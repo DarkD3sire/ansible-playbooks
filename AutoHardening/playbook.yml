@@ -23,7 +23,7 @@
 
     - name: Enable services on system reboot
       service: name={{ item }} enabled=yes
-      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog' ]
 
     - name: Start services
       service: name={{ item }} state=started
