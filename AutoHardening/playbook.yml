@@ -1,0 +1,15 @@
+#########################################################
+# Auto Server Haredening Script
+#########################################################
+---
+- hosts: all
+  become: true
+  vars_files:
+    - vars/default.yml
+
+  tasks:
+    - name: 
+      apt: update_cache=yes force_apt_get=yes
+      tags: [ system ]
+
+      
