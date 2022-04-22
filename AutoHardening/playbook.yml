@@ -27,7 +27,7 @@
 
     - name: Start services
       service: name={{ item }} state=started
-      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog' ]
 
     - name: Add ports
       firewalld:
