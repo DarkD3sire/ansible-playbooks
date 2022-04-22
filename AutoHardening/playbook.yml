@@ -16,3 +16,8 @@
         cache_valid_time: 86400 #One day
       tags: [ system ]
 
+    -name: Install requirec components
+      apt:
+        name: firewalld
+        state: latest
+        enabled: yes
