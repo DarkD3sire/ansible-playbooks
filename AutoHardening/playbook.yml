@@ -37,18 +37,20 @@
        - http
        - https
        - ssh
+       - rsyncd
 
-#    - name: Add ports
-#      firewalld:
-#        permanent: yes
-#        immediate: yes
-#        port: "{{item.port}}/{{item.proto}}"
-#        state: "{{item.state}}"
-#        zone: "{{item.zone}}"
-#      with_items:
-#       - {port: "80", proto: "tcp", state: "enabled", zone: "public" }
-#       - {port: "443", proto: "tcp", state: "enabled", zone: "public" }
-#       - {port: "10050", proto: "tcp", state: "enabled", zone: "internal" }
+    - name: Manage outbound rules
+      template:
+        src: files/direct.xml.j2
+        dest: /etc/firewalld/direct.xml
+      notify: reload_firewalld
+
+
+
+
+
+
+
 
 
 

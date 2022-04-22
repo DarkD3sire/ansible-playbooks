@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<direct>
+  <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="0">-m state --state ESTABLISHED,RELATED -j ACCEPT</rule>
+  <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p tcp -m tcp --dport 80 -j ACCEPT</rule>
+  <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p tcp -m tcp --dport 443 -j ACCEPT</rule>
+  <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p tcp -m tcp --dport 3128 -j ACCEPT</rule>
+  <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p tcp -m tcp --dport 873 -j ACCEPT</rule>
+  <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p tcp -m tcp --dport 53 -j ACCEPT</rule>
+  <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p udp --dport 53 -j ACCEPT</rule>
+  <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="2">-j DROP</rule>
+</direct>
