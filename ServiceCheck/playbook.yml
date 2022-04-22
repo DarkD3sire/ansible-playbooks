@@ -1,0 +1,57 @@
+- hosts: servers
+  gather_facts: false
+  vars:
+    desired_port: <Enter desired port>
+    default_port: <Enter default port>
+  tasks:
+    - name: check if ssh is running on {{ desired_port }}
+      delegate_to: localhost
+      wait_for:
+        port: "{{ desired_port }}"
+        host: "{{ ansible_host }}"
+        timeout: 10
+      ignore_errors: true
+      register: desired_port_check
+
+    - name: check if ssh is running on {{ default_port }}
+      delegate_to: localhost
+      wait_for:
+        port: "{{ default_port }}"
+        host: "{{ ansible_host }}"
+        timeout: 10
+      ignore_errors: true
+      register: default_port_check
+
+    - Enter fail:
+        msg: "ssh is not running (or is running on an unknown port)"
+      when: default_port_check is failed and desired_port_check is failed
+
+    - when: default_port_check is success
+      block:
+        - debug:
+            msg: "ssh is running on default port"
+
+        - name: configure ansible to use port {{ desired_port }} Part 1
+          set_fact:
+            ansible_port: "{{ default_port }}"
+
+        - name: configure ansible to use port {{ desired_port }} Part 2
+          lineinfile:
+            dest: "/etc/ssh/sshd_config"
+            regexp: "^Port"
+            line: "Port {{ desired_port }}"
+          notify: "Restart sshd"
+
+    - when: desired_port_check is success
+      block:
+        - debug:
+            msg: "ssh is running on desired port"
+
+    - name: Flush Handlers
+      meta: flush_handlers
+
+  handlers:
+    - name: Restart sshd
+      service:
+        name: sshd
+        state: restarted

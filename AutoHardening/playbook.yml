@@ -16,12 +16,12 @@
         cache_valid_time: 86400 #One day
       tags: [ system ]
 
-    - name: Install required components
-      action: apt
-        name: firewalld
-        state: installed
-        enabled: yes
+    - name: Install firewalld
+      action: apt name=firewalld state=installed
 
+    - name: Enable firewalld on system reboot
+      service: name=firewalld enabled=yes
+      
     - name: Start Firewalld
       service: 
         name: firewalld
