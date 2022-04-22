@@ -31,9 +31,11 @@
       firewalld:
         permanent: yes
         immediate: yes
-        service: "{{service}}"
+        service: "{{item}}"
       with_items:
-       - {service: "http, htps, ssh" }
+       - http
+       - https
+       - ssh
 
 #    - name: Add ports
 #      firewalld:
