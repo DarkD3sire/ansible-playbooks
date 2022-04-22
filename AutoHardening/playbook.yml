@@ -17,11 +17,11 @@
       tags: [ system ]
 
     - name: Install firewalld
-      action: apt name=firewalld state=installed
+      action: apt name=firewalld state=latest
 
     - name: Enable firewalld on system reboot
       service: name=firewalld enabled=yes
-      
+
     - name: Start Firewalld
       service: 
         name: firewalld
