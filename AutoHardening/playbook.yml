@@ -23,9 +23,7 @@
       service: name=firewalld enabled=yes
 
     - name: Start Firewalld
-      service: 
-        name: firewalld
-        state: started
+      service: name=firewalld state=started
 
     - name: Add ports
       firewalld:
@@ -45,8 +43,11 @@
         dest: /etc/firewalld/direct.xml
       notify: reload_firewalld
 
-
-
+  handlers:
+    - name: reload_firewalld
+      service:
+        name: firewalld
+        state: reload
 
 
 
