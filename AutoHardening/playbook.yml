@@ -79,7 +79,10 @@
       service:
         name: sshd
         state: restart
-
+    - name: restart_sshd
+      service:
+        name: sshd
+        state: restart
 
 
 
