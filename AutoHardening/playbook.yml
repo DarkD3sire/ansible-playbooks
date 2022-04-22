@@ -17,14 +17,16 @@
       tags: [ system ]
 
     - name: Install required components
-      apt:
+      action: apt
         name: firewalld
         state: installed
         enabled: yes
+
     - name: Start Firewalld
       service: 
         name: firewalld
         state: started
+
     - name: Firewalld Rules
       firewalld:
         permanent: yes
