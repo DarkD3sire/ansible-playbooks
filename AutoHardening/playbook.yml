@@ -18,16 +18,16 @@
 
     - name: Install Firewalld, auditd, rsyslog, rsyslog-mysql
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
-      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql', 'chrony' ]
       tags: [ system ]
 
     - name: Enable services on system reboot
       service: name={{ item }} enabled=yes
-      loop: [ 'firewalld', 'auditd', 'rsyslog' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony' ]
 
     - name: Start services
       service: name={{ item }} state=started
-      loop: [ 'firewalld', 'auditd', 'rsyslog' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony' ]
 
     - name: Add ports
       firewalld:
@@ -63,6 +63,8 @@
         src: files/sshd_config.j2
         dest: /etc/ssh/sshd_config
       notify: restart_sshd
+
+
 
   handlers:
     - name: reload_firewalld
