@@ -16,14 +16,18 @@
         cache_valid_time: 86400 #One day
       tags: [ system ]
 
-    - name: Install firewalld
-      action: apt name=firewalld state=latest
+    - name: Install Firewalld, 
+      apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql' ]
+      tags: [ system ]
 
-    - name: Enable firewalld on system reboot
-      service: name=firewalld enabled=yes
+    - name: Enable services on system reboot
+      service: name={{ item }} enabled=yes
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql' ]
 
-    - name: Start Firewalld
-      service: name=firewalld state=started
+    - name: Start services
+      service: name={{ item }} state=started
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql' ]
 
     - name: Add ports
       firewalld:
@@ -48,12 +52,21 @@
         src: files/sysctl.conf.j2
         dest: /etc/sysctl.conf
 
+    - name: Copy /etc/audit file
+      template:
+        src: files/sysctl.conf.j2
+        dest: /etc/sysctl.conf
+      notify: restart_auditd
+
   handlers:
     - name: reload_firewalld
       service:
         name: firewalld
         state: reload
-
+    - name: restart_auditd
+      service:
+        name: auditd
+        state: restart
 
 
 
