@@ -16,18 +16,18 @@
         cache_valid_time: 86400 #One day
       tags: [ system ]
 
-    - name: Install Firewalld, auditd, rsyslog, rsyslog-mysql, fail2ban & AIDE.
+    - name: Install Firewalld, auditd, rsyslog, rsyslog-mysql, fail2ban.
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
-      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql', 'chrony', 'fail2ban', 'aide' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql', 'chrony', 'fail2ban' ]
       tags: [ system ]
 
     - name: Enable services on system reboot
       service: name={{ item }} enabled=yes
-      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony', 'fail2ban', 'aide' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony', 'fail2ban' ]
 
     - name: Start services
       service: name={{ item }} state=started
-      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony', 'fail2ban', 'aide' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony', 'fail2ban' ]
 
     - name: Add ports
       firewalld:
