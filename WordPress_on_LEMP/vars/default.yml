@@ -3,8 +3,8 @@
 php_modules: [ 'php8.0-curl', 'php8.0-gd', 'php8.0-mbstring', 'php8.0-xml', 'php8.0-xmlrpc', 'php8.0-soap', 'php8.0-intl', 'php8.0-zip', 'php8.0-imagick' ]
 
 #Nginx Settings
-http_host: "alumni.acr.iitb.ac.in"
-http_conf: "alumni.acr.iitb.ac.in.conf"
+http_host: "192.168.184.129"
+http_conf: "192.168.184.129.conf"
 #http_port: "80"
 
 #MySQL Settings
