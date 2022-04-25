@@ -17,7 +17,7 @@ for dir in `cat /etc/passwd | egrep -v '(root|sync|halt|shutdown)' | awk -F: '($
   done
 done
 
-df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type f -perm -0002) > /root/world_writable_files
+df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type f -perm -0002 > /root/world_writable_files
 if [ -s /root/world_writable_files ]; then
 echo "World writable file detected: $(cat /root/world_writable_files)"
 else

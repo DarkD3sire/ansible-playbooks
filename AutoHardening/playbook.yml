@@ -104,15 +104,3 @@
       service:
         name: chronyd
         state: restart
-
-
-
-
-
-
-
-
-
-
-
-
