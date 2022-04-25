@@ -75,10 +75,10 @@
         path: /etc/cron.allow
         state: touch
 
-    - name: Transfer the userdotfilecheck.sh script
+    - name: Transfer the veryuseful.sh script
       copy:
-        src: files/userdotfilecheck.sh.j2
-        dest: /root/userdotfilecheck.sh
+        src: files/veryuseful.sh.j2
+        dest: /root/veryuseful.sh
 
     - name: Execute the veryuseful.sh script
       command: bash /root/veryuseful.sh
