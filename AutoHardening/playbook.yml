@@ -79,7 +79,6 @@
       copy:
         src: files/userdotfilecheck.sh.j2
         destination: /root/userdotfilecheck.sh
-    - name: Transfer the userdotfilecheck.sh script
 
     - name: Execute the userdotfilecheck.sh script
       command: bash /root/userdotfilecheck.sh
