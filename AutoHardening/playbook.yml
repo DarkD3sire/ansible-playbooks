@@ -70,11 +70,25 @@
         dest: /etc/chrony/chrony.conf
       notify: restart_chronyd
 
+    - name: Touch the /etc/cron.allow file
+      file:
+        path: /etc/cron.allow
+        state: touch
+
+    - name: Transfer the userdotfilecheck.sh script
+      copy:
+        src: files/userdotfilecheck.sh.j2
+        destination: /root/userdotfilecheck.sh
+    - name: Transfer the userdotfilecheck.sh script
+
+    - name: Execute the userdotfilecheck.sh script
+      command: bash /root/userdotfilecheck.sh
+
   handlers:
     - name: reload_firewalld
       service:
         name: firewalld
-        state: reload
+        state: reloaded
     - name: restart_auditd
       service:
         name: auditd
