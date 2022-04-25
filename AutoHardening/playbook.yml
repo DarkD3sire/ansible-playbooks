@@ -16,7 +16,7 @@
         cache_valid_time: 86400 #One day
       tags: [ system ]
 
-    - name: Install Firewalld, auditd, rsyslog, rsyslog-mysql, fail2ban
+    - name: Install Firewalld, auditd, rsyslog, rsyslog-mysql, fail2ban & AIDE.
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
       loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql', 'chrony', 'fail2ban', 'aide' ]
       tags: [ system ]
