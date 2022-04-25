@@ -95,12 +95,12 @@
     - name: restart_sshd
       service:
         name: sshd
-        state: restart
+        state: restarted
     - name: restart_sshd
       service:
         name: sshd
-        state: restart
+        state: restarted
     - name: restart_chronyd
       service:
         name: chronyd
-        state: restart
+        state: restarted
