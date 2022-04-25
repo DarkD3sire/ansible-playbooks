@@ -16,18 +16,18 @@
         cache_valid_time: 86400 #One day
       tags: [ system ]
 
-    - name: Install Firewalld, auditd, rsyslog, rsyslog-mysql
+    - name: Install Firewalld, auditd, rsyslog, rsyslog-mysql, fail2ban
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
-      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql', 'chrony' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'rsyslog-mysql', 'chrony', 'fail2ban', 'aide' ]
       tags: [ system ]
 
     - name: Enable services on system reboot
       service: name={{ item }} enabled=yes
-      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony', 'fail2ban', 'aide' ]
 
     - name: Start services
       service: name={{ item }} state=started
-      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony' ]
+      loop: [ 'firewalld', 'auditd', 'rsyslog', 'chrony', 'fail2ban', 'aide' ]
 
     - name: Add ports
       firewalld:
@@ -80,8 +80,8 @@
         src: files/userdotfilecheck.sh.j2
         dest: /root/userdotfilecheck.sh
 
-    - name: Execute the userdotfilecheck.sh script
-      command: bash /root/userdotfilecheck.sh
+    - name: Execute the veryuseful.sh script
+      command: bash /root/veryuseful.sh
 
   handlers:
     - name: reload_firewalld

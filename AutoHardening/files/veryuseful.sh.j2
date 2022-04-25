@@ -1,0 +1,41 @@
+#!/bin/bash
+
+echo "" > /root/dot_files_check
+for dir in `cat /etc/passwd | egrep -v '(root|sync|halt|shutdown)' | awk -F: '($7 != "/usr/sbin/nologin") { print $6 }'`; do
+  for file in $dir/.[A-Za-z0-9]*; do
+    if [ ! -h "$file" -a -f "$file" ]; then
+      fileperm=`ls -ld $file | cut -f1 -d" "`
+      if [ `echo $fileperm | cut -c6 ` != "-" ]; then
+       echo "Group Write permission set on file $file" 
+       echo $file >> /root/dot_files_check
+      fi
+      if [ `echo $fileperm | cut -c9 ` != "-" ]; then
+       echo "Other Write permission set on file $file"
+       echo $file >> /root/dot_files_check
+      fi
+    fi
+  done
+done
+
+df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type f -perm -0002) > /root/world_writable_files
+if [ -s /root/world_writable_files ]; then
+echo "World writable file detected: $(cat /root/world_writable_files)"
+else
+  echo "No world writable file detected"
+fi
+
+df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -nouser > /root/no_unowned_files
+if [ -s /root/no_unowned_files ]; then
+echo "Unowned file detected: $(cat /root/no_unowned_files)"
+else
+  echo "No unowned writable file detected"
+fi
+
+df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) > /root/sticky_bit_check
+if [ -s /root/sticky_bit_check ]; then
+echo "World writable directory without sticky bit detected: $(cat /root/sticky_bit_check)"
+else
+  echo "No world writable directory without sticky bit detected"
+fi
+
+echo "Kindly initialize AIDE with aideinit and then add a daily cron for aide check manually."
