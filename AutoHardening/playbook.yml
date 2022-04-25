@@ -64,7 +64,11 @@
         dest: /etc/ssh/sshd_config
       notify: restart_sshd
 
-
+    - name: Copy /etc/chrony/chrony.conf file
+      template:
+        src: files/chrony.conf.j2
+        dest: /etc/chrony/chrony.conf
+      notify: restart_sshd
 
   handlers:
     - name: reload_firewalld
@@ -83,7 +87,10 @@
       service:
         name: sshd
         state: restart
-
+    - name: restart_chronyd
+      service:
+        name: chronyd
+        state: restart
 
 
 
