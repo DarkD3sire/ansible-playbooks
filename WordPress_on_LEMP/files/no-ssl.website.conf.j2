@@ -42,9 +42,6 @@ server {
           include snippets/fastcgi-php.conf;
           fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
         }
-        location ~ \.(txt|md|git)$ {
-          deny all;
-        }
         location ~ /\.ht {
           deny all;
         }
