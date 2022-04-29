@@ -10,7 +10,6 @@
       loop: [ 'git' ]
       tags: [ system ]
 
-    - name: Create git archive from repo
-      ansible.builtin.git:
-        repo: https://github.com/prometheus/prometheus.git
-        dest: /root/prometheus
+    - name: Get prometheus
+      shell: "git clone https://github.com/prometheus/prometheus.git"
+      tags: [ wordpress ]
