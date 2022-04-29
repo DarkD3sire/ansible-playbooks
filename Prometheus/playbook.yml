@@ -9,12 +9,8 @@
       yum: name={{ item }} update_cache=yes state=latest force_apt_get=yes
       loop: [ 'git' ]
       tags: [ system ]
-
+      
     - name: Git Prometheus
       ansible.builtin.git:
-      repo: 'https://github.com/prometheus/prometheus.git/'
+      repo: https://github.com/prometheus/prometheus.git/
       dest: /root/
-      single_branch: yes
-      version: master
-      clone: yes
-      update: yes
