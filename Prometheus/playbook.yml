@@ -11,5 +11,6 @@
       tags: [ system ]
 
     - name: Git Prometheus
-      repo: https://github.com/prometheus/prometheus.git/
+      ansible.builtin.git:
+      repo: 'https://github.com/prometheus/prometheus.git/'
       dest: /root/
