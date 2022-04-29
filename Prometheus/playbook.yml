@@ -13,6 +13,4 @@
     - name: Create git archive from repo
       ansible.builtin.git:
         repo: https://github.com/prometheus/prometheus.git
-        dest: /root/
-        archive: /root/ansible-examples.zip
-
+        dest: /root/prometheus
