@@ -9,9 +9,10 @@
       yum: name={{ item }} update_cache=yes state=latest force_apt_get=yes
       loop: [ 'git' ]
       tags: [ system ]
+
     - name: Create git archive from repo
       ansible.builtin.git:
-      repo: https://github.com/prometheus/prometheus.git
-      dest: /root/
-      archive: /root/ansible-examples.zip
+        repo: https://github.com/prometheus/prometheus.git
+        dest: /root/
+        archive: /root/ansible-examples.zip
 
