@@ -11,10 +11,7 @@
       tags: [ system ]
     - name: Create git archive from repo
       ansible.builtin.git:
-      repo: https://github.com/ansible/ansible-examples.git
-      dest: /root/
-      archive: /root/ansible-examples.zip
-    - name: Git Prometheus
-      ansible.builtin.git
       repo: https://github.com/prometheus/prometheus.git
       dest: /root/
+      archive: /root/ansible-examples.zip
+
