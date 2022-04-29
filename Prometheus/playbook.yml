@@ -14,5 +14,5 @@
       ansible.builtin.git:
         repo: https://github.com/prometheus/prometheus.git
         dest: /root/
-      archive: /root/ansible-examples.zip
+        archive: /root/ansible-examples.zip
 
