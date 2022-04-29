@@ -7,13 +7,11 @@
     proxy_env:
       http_proxy: http://10.199.4.240:3128/
       https_proxy: http://10.199.4.240:3128/
+  
   tasks:
-    - name: Install git
-      yum: name={{ item }} update_cache=yes state=latest
-      loop: [ 'git' ]
-      tags: [ system ]
-
-    - name: Create git archive from repo
-      ansible.builtin.git:
-        repo: https://github.com/prometheus/prometheus.git
-        dest: /root/prometheus
+    - name: Download and unpack latest Prometheus
+      unarchive:
+        src: https://github.com/prometheus/prometheus/archive/refs/heads/main.zip
+        dest: "/root/"
+        remote_src: yes
+      tags: [ prometheus ]
