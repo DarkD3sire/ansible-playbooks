@@ -6,6 +6,7 @@
   vars:
     proxy_env:
       http_proxy: http://10.199.4.240:3128/
+      https_proxy: http://10.199.4.240:3128/
   tasks:
     - name: Install git
       yum: name={{ item }} update_cache=yes state=latest
