@@ -16,5 +16,5 @@
       archive: /tmp/ansible-examples.zip
     - name: Git Prometheus
       ansible.builtin.git
-      repo: 'https://github.com/prometheus/prometheus.git/'
+      repo: https://github.com/prometheus/prometheus.git/
       dest: /root/
