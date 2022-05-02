@@ -52,7 +52,8 @@
         port: 9100/tcp
         state: enabled
 
-    - name: Restart Firewalld
-      ansible.builtin.systemd:
+    - name: Restart service 
+      systemd:
         state: restarted
+        daemon_reload: yes
         name: firewalld
