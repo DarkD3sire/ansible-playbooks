@@ -33,15 +33,3 @@
   become: true
   vars_files:
     - vars/default.yml
-    
-  tasks:
-    - name: Copy the target.json file
-      template:
-        src: "files/target.json.j2"
-        dest: "/home/prometheus/prometheus/$ipaddress.json"
-      tags: [ node_explorer ]
-
-    - name: Inserting a line after a pattern in Ansible example 
-      lineinfile:
-        path: /home/prometheus/prometheus/prometheus.yml
-        line: '        - $ipaddress.json'
