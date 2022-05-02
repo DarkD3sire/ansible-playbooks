@@ -26,10 +26,5 @@
       ansible.builtin.systemd:
         state: started
         daemon_reload: yes
-        name: node_explorer
+        name: node_exporter
         enabled: yes
-
-- hosts: localhost
-  become: true
-  vars_files:
-    - vars/default.yml
