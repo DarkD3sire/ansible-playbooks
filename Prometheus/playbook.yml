@@ -29,6 +29,18 @@
         name: node_exporter
         enabled: yes
 
+    - name: Add port to firewall
+      firewalld:
+        permanent: yes
+        immediate: yes
+        port: 9100/tcp
+        state: enabled
+
+    - name: Restart Firewalld
+      ansible.builtin.systemd:
+        state: restarted
+        name: firewalld
+
 - hosts: localhost
   become: true
   vars_files:
@@ -44,16 +56,3 @@
       ansible.builtin.systemd:
         state: restarted
         name: prometheus
-
-    - name: Add port to firewall
-      firewalld:
-        permanent: yes
-        immediate: yes
-        port: 9100/tcp
-        state: enabled
-
-    - name: Restart service 
-      systemd:
-        state: restarted
-        daemon_reload: yes
-        name: firewalld
