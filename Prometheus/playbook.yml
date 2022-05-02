@@ -11,7 +11,37 @@
   tasks:
     - name: Download and unpack latest Prometheus
       unarchive:
-        src: https://github.com/prometheus/prometheus/archive/refs/heads/main.zip
-        dest: "/root/"
+        src: https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-amd64.tar.gz
+        dest: "/home/iitbdrf"
         remote_src: yes
-      tags: [ prometheus ]
+      tags: [ node_explorer ]
+
+    - name: Copy the node_exporter service file
+      template:
+        src: "files/node_exporter.service.j2"
+        dest: "/etc/systemd/system/node_exporter.service"
+      tags: [ node_explorer ]    
+
+    - name: Start and enable node_explorer service, in all cases, also issue daemon-reload to pick up config changes
+      ansible.builtin.systemd:
+        state: started
+        daemon_reload: yes
+        name: node_explorer
+        enabled: yes
+
+- hosts: localhost
+  become: true
+  vars_files:
+    - vars/default.yml
+    
+  tasks:
+    - name: Copy the target.json file
+      template:
+        src: "files/target.json.j2"
+        dest: "/home/prometheus/prometheus/$ipaddress.json"
+      tags: [ node_explorer ]
+
+    - name: Inserting a line after a pattern in Ansible example 
+      lineinfile:
+        path: /home/prometheus/prometheus/prometheus.yml
+        line: '        - $ipaddress.json'
