@@ -38,7 +38,7 @@
     - name: Add the new server IP to prometheus
       lineinfile:
         dest: /home/prometheus/prometheus/prometheus.yml
-        line: '      - targets: ["10.199.4.234:9100"]'
+        line: '      - targets: ["10.199.4.243:9100"]'
 
     - name: Restart prometheus
       ansible.builtin.systemd:
