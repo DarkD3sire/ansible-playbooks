@@ -49,10 +49,14 @@
   tasks:
     - name: Add the new server IP to prometheus
       lineinfile:
-        dest: /home/prometheus/prometheus/prometheus.yml
         line: '      - targets: ["10.199.4.240:9100"]'
+        dest: /home/prometheus/prometheus/prometheus.yml
+      lineinfile:
         line: '        labels:'
+        dest: /home/prometheus/prometheus/prometheus.yml
+      lineinfile:
         line: "          instance: 'ACR OFfice Host Server'"
+        dest: /home/prometheus/prometheus/prometheus.yml
 
     - name: Restart prometheus
       ansible.builtin.systemd:
