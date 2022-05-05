@@ -1,4 +1,5 @@
 --- 
 all: 
-  ansible_ssh_port: 58342
   hosts: "10.199.4.240"
+  vars: 
+    ansible_ssh_port: 58342
