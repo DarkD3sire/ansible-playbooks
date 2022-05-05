@@ -4,3 +4,4 @@ all:
   vars: 
     ansible_ssh_port: 58342
     ansible_user: acroffice
+    ansible_sudo_pass: Iitbdrf-ubuntu@2021
