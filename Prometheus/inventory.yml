@@ -3,4 +3,4 @@ all:
   hosts: "10.199.4.240"
   vars: 
     ansible_ssh_port: 58342
-    ansible_user: iitbdrf
+    ansible_user: acroffice
