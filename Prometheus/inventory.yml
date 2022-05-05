@@ -1,7 +1,7 @@
 --- 
 all: 
-  hosts: "10.199.4.235"
+  hosts: "10.199.4.240"
   vars: 
-    ansible_ssh_port: 22
-    ansible_user: centre_server
-    ansible_sudo_pass: iitbdrf-ubuntu@123
+    ansible_ssh_port: 2321
+    ansible_user: acr_proxy_server
+    ansible_sudo_pass: iitbdrf-ubuntu@2021

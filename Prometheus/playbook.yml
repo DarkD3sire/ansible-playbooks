@@ -49,13 +49,7 @@
   tasks:
     - name: Add the new server IP to prometheus
       lineinfile:
-        line: '      - targets: ["10.199.4.235:9100"]'
-        dest: /home/prometheus/prometheus/prometheus.yml
-      lineinfile:
-        line: '        labels:'
-        dest: /home/prometheus/prometheus/prometheus.yml
-      lineinfile:
-        line: "          instance: 'HP Centre Host Server'"
+        line: '      - targets: ["10.199.4.240:9100"]'
         dest: /home/prometheus/prometheus/prometheus.yml
 
     - name: Restart prometheus
