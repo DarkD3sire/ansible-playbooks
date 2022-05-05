@@ -29,17 +29,17 @@
         name: node_exporter
         enabled: yes
 
-    - name: Add port to firewall
-      firewalld:
-        permanent: yes
-        immediate: yes
-        port: 9100/tcp
-        state: enabled
+#    - name: Add port to firewall
+#      firewalld:
+#        permanent: yes
+#        immediate: yes
+#        port: 9100/tcp
+#        state: enabled
 
-    - name: Restart Firewalld
-      ansible.builtin.systemd:
-        state: restarted
-        name: firewalld
+#    - name: Restart Firewalld
+#      ansible.builtin.systemd:
+#        state: restarted
+#        name: firewalld
 
 - hosts: localhost
   become: true
@@ -50,7 +50,7 @@
     - name: Add the new server IP to prometheus
       lineinfile:
         dest: /home/prometheus/prometheus/prometheus.yml
-        line: '      - targets: ["10.199.4.200:9100"]'
+        line: '      - targets: ["10.199.4.242:9100"]'
 
     - name: Restart prometheus
       ansible.builtin.systemd:
