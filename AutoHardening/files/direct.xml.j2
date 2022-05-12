@@ -7,5 +7,6 @@
   <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p tcp -m tcp --dport 873 -j ACCEPT</rule>
   <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p tcp -m tcp --dport 53 -j ACCEPT</rule>
   <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p udp --dport 53 -j ACCEPT</rule>
+  <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="1">-p udp --dport 123 -j ACCEPT</rule>
   <rule table="filter" chain="OUTPUT" ipv="ipv4" priority="2">-j DROP</rule>
 </direct>
